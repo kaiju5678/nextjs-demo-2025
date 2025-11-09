@@ -1,12 +1,16 @@
 import { Button, Input, InputGroup } from "reactstrap";
 import { FaSearch } from "react-icons/fa";
+import { useState } from "react";
 
-export default function FormComponent() {
+export default function FormComponent({ onSearch }) {
+  
+  const [textSearch, settextSearch] = useState("");
+  
   return (
     <div className="bg-blue-50 py-6 px-4">
-      <form className="flex flex-col sm:flex-row justify-center items-center gap-3">
+      <form className="flex flex-col sm:flex-row justify-center items-center gap-3" onSubmit={(e) => { e.preventDefault(); onSearch(textSearch); }}>
         <InputGroup className="max-w-md">
-          <Input placeholder="Search products" />
+          <Input placeholder="Search products" value={textSearch} onChange={(e) => settextSearch(e.target.value)} />
         </InputGroup>
 
         <Button
